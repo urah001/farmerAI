@@ -1,8 +1,12 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CropRecommendationForm } from "@/components/crop-recommendation-form"
-import { CropRecommendationResults } from "@/components/crop-recommendation-results"
+"use client"
+import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CropRecommendationForm } from "@/components/crop-recommendation-form";
+import { CropRecommendationResults } from "@/components/crop-recommendation-results";
 
 export default function CropRecommendationPage() {
+  const [result, setResult] = useState("");
+
   return (
     <div className="container py-10">
       <h1 className="text-3xl font-bold mb-6">Crop Recommendation System</h1>
@@ -18,7 +22,7 @@ export default function CropRecommendationPage() {
             <CardDescription>Provide details about your soil and farm conditions</CardDescription>
           </CardHeader>
           <CardContent>
-            <CropRecommendationForm />
+            <CropRecommendationForm onResult={setResult} /> {/* FIXED HERE */}
           </CardContent>
         </Card>
 
@@ -28,11 +32,10 @@ export default function CropRecommendationPage() {
             <CardDescription>Personalized crop suggestions based on your data</CardDescription>
           </CardHeader>
           <CardContent>
-            <CropRecommendationResults />
+            <CropRecommendationResults result={result} />
           </CardContent>
         </Card>
       </div>
-
       <div className="mt-12">
         <h2 className="text-2xl font-bold mb-4">How It Works</h2>
         <div className="grid gap-6 md:grid-cols-3">
@@ -42,7 +45,7 @@ export default function CropRecommendationPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-500">
-                Input your soil parameters, location, and farm conditions. The system collects essential data points
+                The system collects essential data points
                 needed for accurate predictions.
               </p>
             </CardContent>
@@ -73,6 +76,8 @@ export default function CropRecommendationPage() {
           </Card>
         </div>
       </div>
+
+
     </div>
-  )
+  );
 }

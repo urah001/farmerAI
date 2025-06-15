@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,10 +9,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider"
 import { Loader2 } from "lucide-react"
 
-export function CropRecommendationForm() {
+export function CropRecommendationForm({ onResult }: { onResult: (result: string) => void }) {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
-    soilType: "",
+    //soilType: "",
     soilpH: 7.0,
     nitrogen: 50,
     phosphorus: 50,
@@ -23,39 +22,49 @@ export function CropRecommendationForm() {
     rainfall: 200,
   })
 
+  const handleChange = (field: string, value: unknown) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
-    // Simulate API call to AI model
-    setTimeout(() => {
-      // This would be replaced with actual AI model call
-      setLoading(false)
+    try {
+      // Prepare data for Flask API
+      const payload = {
+        Nitrogen: formData.nitrogen,
+        Phosphorus: formData.phosphorus,
+        Potassium: formData.potassium,
+        Temperature: formData.temperature,
+        Humidity: formData.humidity,
+        Ph: formData.soilpH,
+        Rainfall: formData.rainfall
+        // Note: soilType not sent since your Python model doesn’t expect it
+      }
 
-      // Dispatch an event that the recommendation results component can listen for
-      const event = new CustomEvent("cropRecommendationComplete", {
-        detail: {
-          recommendations: [
-            { crop: "Rice", confidence: 92, yield: "High" },
-            { crop: "Wheat", confidence: 85, yield: "Medium-High" },
-            { crop: "Maize", confidence: 78, yield: "Medium" },
-          ],
-        },
+      const res = await fetch('http://127.0.0.1:5000/pred', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
-      window.dispatchEvent(event)
-    }, 2000)
-  }
 
-  const handleChange = (field: string, value: unknown) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+      const data = await res.json()
+      onResult(data.recommended_crop)  // Pass result to parent component
+    } catch (error) {
+      console.error("Error:", error)
+      onResult("Error fetching crop recommendation")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-2">
+      {/*  <div className="space-y-2">
           <Label htmlFor="soilType">Soil Type</Label>
-          <Select value={formData.soilType} onValueChange={(value: unknown) => handleChange("soilType", value)}>
+          <Select value={formData.soilType} onValueChange={(value: string) => handleChange("soilType", value)}>
             <SelectTrigger id="soilType">
               <SelectValue placeholder="Select soil type" />
             </SelectTrigger>
@@ -67,7 +76,7 @@ export function CropRecommendationForm() {
               <SelectItem value="peat">Peat</SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </div>*/}
 
         <div className="space-y-2">
           <Label htmlFor="soilpH">Soil pH: {formData.soilpH.toFixed(1)}</Label>
@@ -77,7 +86,7 @@ export function CropRecommendationForm() {
             max={14}
             step={0.1}
             value={[formData.soilpH]}
-            onValueChange={(value: unknown[]) => handleChange("soilpH", value[0])}
+            onValueChange={(value: number[]) => handleChange("soilpH", value[0])}
           />
         </div>
       </div>
@@ -90,7 +99,7 @@ export function CropRecommendationForm() {
           max={140}
           step={1}
           value={[formData.nitrogen]}
-          onValueChange={(value: unknown[]) => handleChange("nitrogen", value[0])}
+          onValueChange={(value: number[]) => handleChange("nitrogen", value[0])}
         />
       </div>
 
@@ -102,7 +111,7 @@ export function CropRecommendationForm() {
           max={140}
           step={1}
           value={[formData.phosphorus]}
-          onValueChange={(value: unknown[]) => handleChange("phosphorus", value[0])}
+          onValueChange={(value: number[]) => handleChange("phosphorus", value[0])}
         />
       </div>
 
@@ -114,7 +123,7 @@ export function CropRecommendationForm() {
           max={140}
           step={1}
           value={[formData.potassium]}
-          onValueChange={(value: unknown[]) => handleChange("potassium", value[0])}
+          onValueChange={(value: number[]) => handleChange("potassium", value[0])}
         />
       </div>
 
