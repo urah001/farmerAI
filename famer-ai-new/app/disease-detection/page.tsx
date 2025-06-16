@@ -13,7 +13,7 @@ export default function DiseaseDetectionPage() {
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
-          <CardHeader>
+          <CardHeader>  
             <CardTitle>Upload Plant Images</CardTitle>
             <CardDescription>Take clear photos of affected plant parts</CardDescription>
           </CardHeader>
