@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Leaf } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +37,34 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-
+<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Leaf className="h-6 w-6 text-green-600" />
+            <span className="text-xl font-bold">FarmAI</span>
+          </div>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/" className="text-sm font-medium">
+              Dashboard
+            </Link>
+            <Link href="/crop-recommendation" className="text-sm font-medium">
+              Crop Recommendation
+            </Link>
+            <Link href="/disease-detection" className="text-sm font-medium">
+              Disease Detection
+            </Link>
+            <Link href="/weather" className="text-sm font-medium">
+              Weather
+            </Link>
+          </nav>
+          <div className="flex items-center gap-4">
+            <Button variant="outline" size="sm">
+              Sign In
+            </Button>
+            <Button size="sm">Get Started</Button>
+          </div>
+        </div>
+      </header>
         {children}
         </ThemeProvider>
       </body>
