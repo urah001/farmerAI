@@ -1,79 +1,62 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { DiseaseDetectionUpload } from "@/components/disease-detection-upload"
-import { DiseaseDetectionResults } from "@/components/disease-detection-results"
+"use client";
+import React, { useState, useRef } from "react";
+import * as tmImage from "@teachablemachine/image";
+import Image from "next/image";
 
-export default function DiseaseDetectionPage() {
+export default function DiseaseDetector() {
+  const [prediction, setPrediction] = useState<string>("Waiting for image...");
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const modelRef = useRef<tmImage.CustomMobileNet | null>(null);
+  const modelURL = "https://teachablemachine.withgoogle.com/models/pSEUU8y40/";
+
+  const initModel = async () => {
+    if (!modelRef.current) {
+      const model = await tmImage.load(
+        `${modelURL}model.json`,
+        `${modelURL}metadata.json`
+      );
+      modelRef.current = model;
+    }
+  };
+
+  const predict = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files || event.target.files.length === 0) return;
+
+    const file = event.target.files[0];
+    const objectURL = URL.createObjectURL(file);
+    setImageSrc(objectURL);
+
+    await initModel();
+  };
+
+  const handleImageLoad = async (img: HTMLImageElement) => {
+    if (!modelRef.current) return;
+    const predictions = await modelRef.current.predict(img);
+    const topPrediction = predictions.sort(
+      (a, b) => b.probability - a.probability
+    )[0];
+    setPrediction(
+      `${topPrediction.className} (${(topPrediction.probability * 100).toFixed(
+        2
+      )}%)`
+    );
+  };
+
   return (
-    <div className="container py-10">
-      <h1 className="text-3xl font-bold mb-6">Plant Disease Detection</h1>
-      <p className="text-gray-500 mb-8 max-w-3xl">
-        Our AI-powered disease detection system uses a Convolutional Neural Network (CNN) to identify plant diseases
-        from images. Upload photos of your crops to get instant diagnosis and treatment recommendations.
-      </p>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>  
-            <CardTitle>Upload Plant Images</CardTitle>
-            <CardDescription>Take clear photos of affected plant parts</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <DiseaseDetectionUpload />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>AI Diagnosis</CardTitle>
-            <CardDescription>Disease identification and treatment recommendations</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {/* the components incharge of the result of the disease detection */}
-            <DiseaseDetectionResults />
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="mt-12">
-        <h2 className="text-2xl font-bold mb-4">How It Works</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Image Upload</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-500">
-                Upload clear images of affected plant parts. For best results, take close-up photos in good lighting
-                conditions.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">CNN Analysis</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-500">
-                Our Convolutional Neural Network (CNN) analyzes the images to identify patterns associated with specific
-                plant diseases.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Treatment Plan</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-500">
-                Receive a detailed diagnosis with confidence score, disease information, and recommended treatment
-                options.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+    <div className="text-center">
+      <h2 className="text-xl font-bold mb-4">Plant Disease Detector</h2>
+      <input type="file" accept="image/*" onChange={predict} className="mb-4" />
+      {imageSrc && (
+        <Image
+          src={imageSrc}
+          alt="Uploaded Preview"
+          onLoad={(e) => handleImageLoad(e.currentTarget)}
+          className="max-w-xs mx-auto mb-4"
+          width={800}
+          height={550}
+        />
+      )}
+      <p className="text-gray-100 font-semibold">{prediction}</p>
     </div>
-  )
+  );
 }
