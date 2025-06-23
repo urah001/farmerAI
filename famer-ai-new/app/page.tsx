@@ -8,34 +8,7 @@ import Image from "next/image"
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-      {/* <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Leaf className="h-6 w-6 text-green-600" />
-            <span className="text-xl font-bold">FarmAI</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-sm font-medium">
-              Dashboard
-            </Link>
-            <Link href="/crop-recommendation" className="text-sm font-medium">
-              Crop Recommendation
-            </Link>
-            <Link href="/disease-detection" className="text-sm font-medium">
-              Disease Detection
-            </Link>
-            <Link href="/weather" className="text-sm font-medium">
-              Weather
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm">
-              Sign In
-            </Button>
-            <Button size="sm">Get Started</Button>
-          </div>
-        </div>
-      </header> */}
+    
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 bg-green-50 dark:bg-green-950">
           <div className="container px-4 md:px-6">

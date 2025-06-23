@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import {
   RegisterLink,
   LoginLink,
+  LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
@@ -20,7 +21,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 //   variable: "--font-geist-mono",
 //   subsets: ["latin"],
 // });
-
+// check if user is authenticated , if they are , show them the complete nav and a logout else show them only the login and signup 
 const { isAuthenticated } = getKindeServerSession();
 const isUserAuthenticated = await isAuthenticated();
 
@@ -51,37 +52,46 @@ export default function RootLayout({
                 <Leaf className="h-6 w-6 text-green-600" />
                 <span className="text-xl font-bold">FarmAI</span>
               </div>
-              <nav className="hidden md:flex items-center gap-6">
-                <Link href="/dashboard" className="text-sm font-medium">
-                  Dashboard
-                </Link>
-                <Link
-                  href="/crop-recommendation"
-                  className="text-sm font-medium"
-                >
-                  Crop Recommendation
-                </Link>
-                <Link href="/disease-detection" className="text-sm font-medium">
-                  Disease Detection
-                </Link>
-                <Link href="/weather" className="text-sm font-medium">
-                  Weather
-                </Link>
-              </nav>
+            
 
               {isUserAuthenticated ? (
-                <div className="flex items-center gap-4">
-                  <RegisterLink>
-                    <Button variant="outline" size="sm">
-                      Sign Up
-                    </Button>
-                  </RegisterLink>
-                  <LoginLink>
-                    <Button size="sm">Login</Button>
-                  </LoginLink>
-                </div>
+                 <>
+                 <nav className="hidden md:flex items-center gap-6">
+                   <Link href="/dashboard" className="text-sm font-medium">
+                     Dashboard
+                   </Link>
+                   <Link
+                     href="/crop-recommendation"
+                     className="text-sm font-medium"
+                   >
+                     Crop Recommendation
+                   </Link>
+                   <Link
+                     href="/disease-detection"
+                     className="text-sm font-medium"
+                   >
+                     Disease Detection
+                   </Link>
+                   <Link href="/weather" className="text-sm font-medium">
+                     Weather
+                   </Link>
+                 </nav>
+                 <Button variant="outline" size="sm">
+                   <LogoutLink>Log out</LogoutLink>
+                 </Button>
+               </>
+                
               ) : (
-                <div></div>
+                <div className="flex items-center gap-4">
+                <RegisterLink>
+                  <Button variant="outline" size="sm">
+                    Sign Up
+                  </Button>
+                </RegisterLink>
+                <LoginLink>
+                  <Button size="sm">Login</Button>
+                </LoginLink>
+              </div>
               )}
             </div>
           </header>
