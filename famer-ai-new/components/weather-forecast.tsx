@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 
+
 export function WeatherForecast() {
   const [data, setData] = useState<any>(null);
 

@@ -5,6 +5,11 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Leaf } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import {
+  RegisterLink,
+  LoginLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -15,6 +20,9 @@ import { Button } from "@/components/ui/button";
 //   variable: "--font-geist-mono",
 //   subsets: ["latin"],
 // });
+
+const { isAuthenticated } = getKindeServerSession();
+const isUserAuthenticated = await isAuthenticated();
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        // className={`${geistSans.variable} antialiased`}
+      // className={`${geistSans.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -37,35 +45,47 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Leaf className="h-6 w-6 text-green-600" />
-            <span className="text-xl font-bold">FarmAI</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-sm font-medium">
-              Dashboard
-            </Link>
-            <Link href="/crop-recommendation" className="text-sm font-medium">
-              Crop Recommendation
-            </Link>
-            <Link href="/disease-detection" className="text-sm font-medium">
-              Disease Detection
-            </Link>
-            <Link href="/weather" className="text-sm font-medium">
-              Weather
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm">
-              Sign In
-            </Button>
-            <Button size="sm">Get Started</Button>
-          </div>
-        </div>
-      </header>
-        {children}
+          <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <div className="container flex h-16 items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Leaf className="h-6 w-6 text-green-600" />
+                <span className="text-xl font-bold">FarmAI</span>
+              </div>
+              <nav className="hidden md:flex items-center gap-6">
+                <Link href="/dashboard" className="text-sm font-medium">
+                  Dashboard
+                </Link>
+                <Link
+                  href="/crop-recommendation"
+                  className="text-sm font-medium"
+                >
+                  Crop Recommendation
+                </Link>
+                <Link href="/disease-detection" className="text-sm font-medium">
+                  Disease Detection
+                </Link>
+                <Link href="/weather" className="text-sm font-medium">
+                  Weather
+                </Link>
+              </nav>
+
+              {isUserAuthenticated ? (
+                <div className="flex items-center gap-4">
+                  <RegisterLink>
+                    <Button variant="outline" size="sm">
+                      Sign Up
+                    </Button>
+                  </RegisterLink>
+                  <LoginLink>
+                    <Button size="sm">Login</Button>
+                  </LoginLink>
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </header>
+          {children}
         </ThemeProvider>
       </body>
     </html>
