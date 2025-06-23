@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { WeatherDashboard } from "@/components/weather-dashboard"
 import { WeatherForecast } from "@/components/weather-forecast"
-import { WeatherAlerts } from "@/components/weather-alerts"
+//import { WeatherAlerts } from "@/components/weather-alerts"
 
 export default function WeatherPage() {
   return (
@@ -17,7 +17,7 @@ export default function WeatherPage() {
 
         <div className="grid gap-6 md:grid-cols-2">
           <WeatherForecast />
-          <WeatherAlerts />
+          {/* <WeatherAlerts /> */}
         </div>
       </div>
 
