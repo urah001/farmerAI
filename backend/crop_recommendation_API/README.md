@@ -17,6 +17,3 @@ Now, URL is not working because free trial limit is exceeded.
 - Humidity
 - Ph
 
-## Note
-
-The API is currently not working due to the free trial limit being exceeded. You are free to deploy and use it in your own environment.
