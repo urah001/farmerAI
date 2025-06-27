@@ -1,3 +1,4 @@
+import NavText from "@/components/NavText"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { WeatherDashboard } from "@/components/weather-dashboard"
 import { WeatherForecast } from "@/components/weather-forecast"
@@ -5,6 +6,8 @@ import { WeatherForecast } from "@/components/weather-forecast"
 
 export default function WeatherPage() {
   return (
+    <>
+<NavText/>    
     <div className="container py-10">
       <h1 className="text-3xl font-bold mb-6">Weather Monitoring</h1>
       <p className="text-gray-500 mb-8 max-w-3xl">
@@ -60,5 +63,6 @@ export default function WeatherPage() {
         </div>
       </div>
     </div>
+    </>
   )
 }

@@ -2,6 +2,7 @@
 import React, { useState, useRef } from "react";
 import * as tmImage from "@teachablemachine/image";
 import Image from "next/image";
+import NavText from "@/components/NavText";
 
 export default function DiseaseDetector() {
   const [prediction, setPrediction] = useState<string>("Waiting for image...");
@@ -43,6 +44,8 @@ export default function DiseaseDetector() {
   };
 
   return (
+    <>
+    <NavText/>
     <div className="text-center">
       <h2 className="text-xl font-bold mb-4">Plant Disease Detector</h2>
       <input type="file" accept="image/*" onChange={predict} className="mb-4" />
@@ -58,5 +61,6 @@ export default function DiseaseDetector() {
       )}
       <p className="text-gray-100 font-semibold">{prediction}</p>
     </div>
+    </>
   );
 }

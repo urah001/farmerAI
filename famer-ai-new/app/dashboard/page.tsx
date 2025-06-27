@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import { CropRecommendationResults } from "@/components/crop-recommendation-results";
 import { WeatherDashboard } from "@/components/weather-dashboard";
+import NavText from "@/components/NavText";
 
 export default function DashboardPage() {
   const [weather, setWeather] = useState<any>(null);
@@ -28,6 +29,8 @@ export default function DashboardPage() {
   }, []);
 
   return (
+    <>
+    <NavText/>
     <div className="container py-8 space-y-6">
       <h1 className="text-3xl font-bold">Welcome, Farmer!</h1>
       <p className="text-gray-500">Heres your farm insights dashboard.</p>
@@ -112,5 +115,6 @@ export default function DashboardPage() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
