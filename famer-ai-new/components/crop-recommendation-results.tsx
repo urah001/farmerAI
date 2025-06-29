@@ -1,9 +1,15 @@
+"use client"
+
 export function CropRecommendationResults({ result }: { result: string }) {
-  
   return (
-    <div>
-      <h3 className="text-lg font-semibold mb-2">Recommended Crop:</h3>
-      <p className="text-white">{result || "No recommendation yet"}</p>
+    <div className="text-center mt-4">
+      {result ? (
+        <div className="text-xl font-semibold text-green-600">
+          🌱 Recommended Crop: <span className="font-bold">{result}</span>
+        </div>
+      ) : (
+        <div className="text-gray-500">Enter your data to get a recommendation</div>
+      )}
     </div>
-  );
+  )
 }

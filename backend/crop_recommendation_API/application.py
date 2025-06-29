@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # type: ignore # Add this
+from flask_cors import CORS   # type: ignore
 import numpy as np
 import pickle
 

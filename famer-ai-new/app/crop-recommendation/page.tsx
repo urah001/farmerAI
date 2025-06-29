@@ -33,8 +33,8 @@ export default function CropRecommendationPage() {
                 Provide details about your soil and farm conditions
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <CropRecommendationForm onResult={setResult} /> {/* FIXED HERE */}
+            <CardContent> 
+              <CropRecommendationForm onResult={setResult} /> FIXED HERE
             </CardContent>
           </Card>
 

@@ -5,7 +5,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
 import { Loader2 } from "lucide-react"
 
@@ -33,17 +33,18 @@ export function CropRecommendationForm({ onResult }: { onResult: (result: string
     try {
       // Prepare data for Flask API
       const payload = {
-        Nitrogen: formData.nitrogen,
-        Phosphorus: formData.phosphorus,
-        Potassium: formData.potassium,
-        Temperature: formData.temperature,
+        SoilPH: formData.soilpH,
+        NitrogenN: formData.nitrogen,
+        PhosphorusP: formData.phosphorus,
+        PotassiumK: formData.potassium,
+        TemperatureOC: formData.temperature,
         Humidity: formData.humidity,
-        Ph: formData.soilpH,
-        Rainfall: formData.rainfall
+        RainfallMM: formData.rainfall,
+  
         // Note: soilType not sent since your Python model doesn’t expect it
       }
 
-      const res = await fetch('http://127.0.0.1:5000/pred', {
+      const res = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
