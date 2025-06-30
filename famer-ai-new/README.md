@@ -14,3 +14,8 @@ iii. To develop a high performing model with an intuitive online platform that g
 accessible for farmers with different degrees of technical expertise.
 
 iv. To evaluate the performance metrics like accuracy, F1, score and recall.
+
+
+> for the limitation : 
+ - disease-detection :  would need a larger library/database for learning which would help the machine learning model identify new diseases 
+ - crop-recommendation :  the machine learning model would need to be sync or recreated everytiime for it to return 99% accuracy 

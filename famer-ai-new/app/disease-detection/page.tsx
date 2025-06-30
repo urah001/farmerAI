@@ -42,6 +42,7 @@ export default function DiseaseDetector() {
       )}%)`
     );
   };
+  console.log("ML prediction",prediction)
 
   return (
     <>
@@ -59,7 +60,8 @@ export default function DiseaseDetector() {
           height={550}
         />
       )}
-      <p className="text-gray-100 font-semibold">{prediction}</p>
+      <p className="text-black-100 font-semibold">{prediction}</p>
+      
     </div>
     </>
   );
