@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import { useEffect, useState } from "react";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+  Card, CardHeader, CardTitle, CardDescription, CardContent,
 } from "@/components/ui/card";
 import { Cloud, CloudRain, CloudSun, Sun } from "lucide-react";
 
@@ -16,11 +11,12 @@ export function WeatherDashboard() {
 
   useEffect(() => {
     fetch("/api/weather")
-      .then((res) => res.json())
-      .then(setData);
+      .then(res => res.json())
+      .then(setData)
+      .catch(console.error);
   }, []);
 
-  if (!data)
+  if (!data?.currentConditions) {
     return (
       <Card className="p-4">
         <CardHeader>
@@ -29,46 +25,35 @@ export function WeatherDashboard() {
         </CardHeader>
       </Card>
     );
+  }
 
   const { temperature, windSpeed, condition } = data.currentConditions;
 
-  const getWeatherIcon = (condition: string) => {
-    switch (condition.toLowerCase()) {
-      case "sunny":
-        return <Sun className="h-10 w-10 text-yellow-500" />;
-      case "partly cloudy":
-        return <CloudSun className="h-10 w-10 text-gray-500" />;
-      case "cloudy":
-        return <Cloud className="h-10 w-10 text-gray-500" />;
-      case "rainy":
-        return <CloudRain className="h-10 w-10 text-blue-500" />;
-      default:
-        return <Sun className="h-10 w-10 text-yellow-500" />;
-    }
+  const getWeatherIcon = (code: string) => {
+    const num = +code;
+    if (num === 0) return <Sun className="h-10 w-10 text-yellow-500" />;
+    if ([1,2,3].includes(num)) return <CloudSun className="h-10 w-10 text-gray-500" />;
+    if ([61,63,65,80,81,82].includes(num)) return <CloudRain className="h-10 w-10 text-blue-500" />;
+    return <Cloud className="h-10 w-10 text-gray-500" />;
   };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Weather Dashboard</CardTitle>
-        <CardDescription>
-          Current conditions for your location
-        </CardDescription>
+        <CardDescription>Current conditions in Osara, Okene</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center space-x-4">
           {getWeatherIcon(condition)}
           <div>
             <p className="text-3xl font-bold">{temperature}°C</p>
-            <p className="text-gray-500 capitalize">{condition}</p>
+            <p className="text-gray-500">Code {condition}</p>
           </div>
         </div>
-
-        <div className="mt-4 grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm font-medium">Wind Speed</p>
-            <p className="text-lg">{windSpeed} km/h</p>
-          </div>
+        <div className="mt-4">
+          <p className="text-sm font-medium">Wind Speed:</p>
+          <p className="text-lg">{windSpeed} km/h</p>
         </div>
       </CardContent>
     </Card>
