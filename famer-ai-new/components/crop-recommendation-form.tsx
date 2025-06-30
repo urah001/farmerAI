@@ -121,7 +121,7 @@ export function CropRecommendationForm({ onResult }: { onResult: (result: string
         <Slider
           id="potassium"
           min={0}
-          max={140}
+          max={150}
           step={1}
           value={[formData.potassium]}
           onValueChange={(value: number[]) => handleChange("potassium", value[0])}

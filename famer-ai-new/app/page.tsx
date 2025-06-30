@@ -8,9 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ArrowRight, Leaf, CloudSun, Bug } from "lucide-react";
-import { WeatherWidget } from "@/components/weather-widget";
+//import { WeatherWidget } from "@/components/weather-widget";
 import Image from "next/image";
 import AuthNav from "@/components/AuthNav";
+import { WeatherDashboard } from "@/components/weather-dashboard";
 
 export default function Home() {
   return (
@@ -130,7 +131,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="mx-auto max-w-3xl py-12">
-                <WeatherWidget />
+                {/* <WeatherWidget /> */}
+                <WeatherDashboard/>
               </div>
             </div>
           </section>
@@ -140,7 +142,7 @@ export default function Home() {
             <p className="text-sm text-gray-500 dark:text-gray-400">
               © 2025 FarmAI. All rights reserved.
             </p>
-            <nav className="flex gap-4 sm:gap-6">
+            {/* <nav className="flex gap-4 sm:gap-6">
               <Link className="text-sm font-medium hover:underline" href="#">
                 Terms of Service
               </Link>
@@ -150,7 +152,7 @@ export default function Home() {
               <Link className="text-sm font-medium hover:underline" href="#">
                 Contact
               </Link>
-            </nav>
+            </nav> */}
           </div>
         </footer>
       </div>
