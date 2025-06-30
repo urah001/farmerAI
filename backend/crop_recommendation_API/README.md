@@ -8,4 +8,5 @@
 
 
 # to run 
-python application.py runserver
+python sendData.py runserver
+application is used to train a model

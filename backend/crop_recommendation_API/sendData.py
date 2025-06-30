@@ -22,7 +22,7 @@ def predict():
         data["RainfallMM"]
     ]
 
-    prediction = model.predict([features])[0]  # This will return a string like "Rice"
+    prediction = model.predict([features])[0] 
     return jsonify({"recommended_crop": prediction})
 
 if __name__ == "__main__":

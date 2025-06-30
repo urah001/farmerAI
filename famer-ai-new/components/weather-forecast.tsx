@@ -31,7 +31,9 @@ export function WeatherForecast() {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {data.forecast.map((day: any, idx: number) => {
+        {data?.forecast && data.forecast.map((day: any, idx: number) => {
+
+          //{data.forecast.map((day: any, idx: number) => {
             const IconComponent =
               day.condition.toLowerCase().includes("sun")
                 ? Sun
