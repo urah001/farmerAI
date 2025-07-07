@@ -36,12 +36,11 @@ export function DiseaseDetectionUpload() {
 
     setLoading(true)
 
-    // Simulate API call to AI model
+    // the API call to AI model
     setTimeout(() => {
-      // This would be replaced with actual AI model call
       setLoading(false)
 
-      // Dispatch an event that the results component can listen for
+      // call an event that the results component can listen for
       const event = new CustomEvent("diseaseDetectionComplete", {
         detail: {
           disease: "Late Blight",

@@ -19,3 +19,9 @@ iv. To evaluate the performance metrics like accuracy, F1, score and recall.
 > for the limitation : 
  - disease-detection :  would need a larger library/database for learning which would help the machine learning model identify new diseases 
  - crop-recommendation :  the machine learning model would need to be sync or recreated everytiime for it to return 99% accuracy 
+
+
+# remember
+> having the wrong prediction
+
+> Attributes, or features, in machine learning can be considered as data fields that represent properties of a data object - for example, a customer's ID, address, etc. These combined attributes describing a specific object are also known as attribute vectors or machine learning feature vectors.

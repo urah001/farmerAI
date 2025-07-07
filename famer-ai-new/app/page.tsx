@@ -139,9 +139,9 @@ export default function Home() {
         </main>
         <footer className="w-full border-t py-6 md:py-0">
           <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            {/* <p className="text-sm text-gray-500 dark:text-gray-400">
               © 2025 FarmAI. All rights reserved.
-            </p>
+            </p> */}
             {/* <nav className="flex gap-4 sm:gap-6">
               <Link className="text-sm font-medium hover:underline" href="#">
                 Terms of Service
