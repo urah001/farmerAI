@@ -49,9 +49,9 @@ const NavText = () => {
             <Link href="/disease-detection" className="text-sm font-medium">
               Disease Detection
             </Link>
-            <Link href="/weather" className="text-sm font-medium">
+            {/* <Link href="/weather" className="text-sm font-medium">
               Weather
-            </Link>
+            </Link> */}
           </nav>
 
           <Button variant="outline" size="sm">

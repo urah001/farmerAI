@@ -65,7 +65,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
+   {/*     <Card>
           <CardHeader>
             <CardTitle>Disease Detection</CardTitle>
             <CardDescription>Last Scan Result</CardDescription>
@@ -73,7 +73,7 @@ export default function DashboardPage() {
           <CardContent>
             <p className="text-2xl text-green-600">No Disease Detected ✅</p>
           </CardContent>
-        </Card>
+        </Card>*/}
 
         <Card>
           <CardHeader>
