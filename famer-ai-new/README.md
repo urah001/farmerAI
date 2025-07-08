@@ -27,10 +27,10 @@ iv. To evaluate the performance metrics like accuracy, F1, score and recall.
 # features
 > image animation ( little )
 
-> on user active in specific page ( show true if a user is in this page)
+> on user active in specific page ( show true if a user is in this page) done
 
-> try and get the model built accuracy and screenshot
+> try and get the model built accuracy and screenshot 
 
-> add the about page , write about the system 
+> add the about page , write about the system done
 
 > subsection : about the algorithm used 

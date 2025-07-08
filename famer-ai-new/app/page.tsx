@@ -8,10 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ArrowRight, Leaf, CloudSun, Bug } from "lucide-react";
-//import { WeatherWidget } from "@/components/weather-widget";
 import Image from "next/image";
 import AuthNav from "@/components/AuthNav";
 import { WeatherDashboard } from "@/components/weather-dashboard";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -19,7 +19,13 @@ export default function Home() {
       <AuthNav />
       <div className="flex min-h-screen flex-col">
         <main className="flex-1">
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-green-50 dark:bg-green-950">
+          <motion.section
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="w-full py-12 md:py-24 lg:py-32 bg-green-50 dark:bg-green-950"
+          >
             <div className="container px-4 md:px-6">
               <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
                 <div className="flex flex-col justify-center space-y-4">
@@ -56,8 +62,15 @@ export default function Home() {
                 />
               </div>
             </div>
-          </section>
-          <section className="w-full py-12 md:py-24 lg:py-32">
+          </motion.section>
+
+          <motion.section
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="w-full py-12 md:py-24 lg:py-32"
+          >
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
@@ -71,53 +84,70 @@ export default function Home() {
                 </div>
               </div>
               <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
-                <Card>
-                  <CardHeader>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-800">
-                      <Leaf className="h-6 w-6 text-green-600 dark:text-green-200" />
-                    </div>
-                    <CardTitle className="mt-4">Crop Recommendations</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base">
-                      Get personalized crop suggestions based on your soil
-                      conditions, weather patterns, and historical data using
-                      our Random Forest model.
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-800">
-                      <Bug className="h-6 w-6 text-green-600 dark:text-green-200" />
-                    </div>
-                    <CardTitle className="mt-4">Disease Detection</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base">
-                      Upload images of your plants to identify diseases and get
-                      treatment recommendations using our CNN model.
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-800">
-                      <CloudSun className="h-6 w-6 text-green-600 dark:text-green-200" />
-                    </div>
-                    <CardTitle className="mt-4">Weather Monitoring</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base">
-                      Access real-time weather data and forecasts to plan your
-                      farming activities effectively.
-                    </CardDescription>
-                  </CardContent>
-                </Card>
+                <motion.div whileHover={{ scale: 1.03 }}>
+                  <Card>
+                    <CardHeader>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-800">
+                        <Leaf className="h-6 w-6 text-green-600 dark:text-green-200" />
+                      </div>
+                      <CardTitle className="mt-4">
+                        Crop Recommendations
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-base">
+                        Get personalized crop suggestions based on your soil
+                        conditions, weather patterns, and historical data using
+                        our Random Forest model.
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                <motion.div whileHover={{ scale: 1.03 }}>
+                  <Card>
+                    <CardHeader>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-800">
+                        <Bug className="h-6 w-6 text-green-600 dark:text-green-200" />
+                      </div>
+                      <CardTitle className="mt-4">Disease Detection</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-base">
+                        Upload images of your plants to identify diseases and
+                        get treatment recommendations using our CNN model.
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                <motion.div whileHover={{ scale: 1.03 }}>
+                  <Card>
+                    <CardHeader>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-800">
+                        <CloudSun className="h-6 w-6 text-green-600 dark:text-green-200" />
+                      </div>
+                      <CardTitle className="mt-4">Weather Monitoring</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-base">
+                        Access real-time weather data and forecasts to plan your
+                        farming activities effectively.
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </div>
             </div>
-          </section>
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+          </motion.section>
+
+          <motion.section
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800"
+          >
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
@@ -131,29 +161,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="mx-auto max-w-3xl py-12">
-                {/* <WeatherWidget /> */}
-                <WeatherDashboard/>
+                <WeatherDashboard />
               </div>
             </div>
-          </section>
+          </motion.section>
         </main>
+
         <footer className="w-full border-t py-6 md:py-0">
-          <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-            {/* <p className="text-sm text-gray-500 dark:text-gray-400">
-              © 2025 FarmAI. All rights reserved.
-            </p> */}
-            {/* <nav className="flex gap-4 sm:gap-6">
-              <Link className="text-sm font-medium hover:underline" href="#">
-                Terms of Service
-              </Link>
-              <Link className="text-sm font-medium hover:underline" href="#">
-                Privacy
-              </Link>
-              <Link className="text-sm font-medium hover:underline" href="#">
-                Contact
-              </Link>
-            </nav> */}
-          </div>
+          <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row"></div>
         </footer>
       </div>
     </>
