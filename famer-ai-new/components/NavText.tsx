@@ -1,68 +1,56 @@
+"use client";
+
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { Leaf } from "lucide-react";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 const NavText = () => {
+  const pathname = usePathname();
+
+
+  const navItems = [
+    { href: "/dashboard", label: "Dashboard" },
+    { href: "/crop-recommendation", label: "Crop Recommendation" },
+    { href: "/disease-detection", label: "Disease Detection" },
+    { href: "/about", label: "About" },
+    // { href: "/weather", label: "Weather" },
+  ];
+
   return (
-    <>
-      {/*<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Leaf className="h-6 w-6 text-green-600" />
-            <span className="text-xl font-bold">FarmAI</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/dashboard" className="text-sm font-medium">
-              Dashboard
-            </Link>
-            <Link href="/crop-recommendation" className="text-sm font-medium">
-              Crop Recommendation
-            </Link>
-            <Link href="/disease-detection" className="text-sm font-medium">
-              Disease Detection
-            </Link>
-            <Link href="/weather" className="text-sm font-medium">
-              Weather
-            </Link>
-          </nav>
-          <Button variant="outline" size="sm">
-            <LogoutLink>Log out</LogoutLink>
-          </Button>
+    <header className="sticky top-0 z-50 w-full border-b  backdrop-blur-md">
+      <div className="container flex h-16 items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Leaf className="h-6 w-6 text-green-600" />
+          <span className="text-xl font-bold text-green-800">FarmAI</span>
         </div>
-      </header>*/}
 
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Leaf className="h-6 w-6 text-green-600" />
-            <span className="text-xl font-bold">FarmAI</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/dashboard" className="text-sm font-medium">
-              Dashboard
+        <nav className="hidden md:flex items-center gap-4">
+          {navItems.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={clsx(
+                "text-sm font-medium px-3 py-2 rounded-md transition-colors",
+                {
+                  "bg-green-600 text-white shadow": pathname === href,
+                  "text-gray-700 hover:bg-green-100 hover:text-green-700": pathname !== href,
+                }
+              )}
+            >
+              {label}
             </Link>
-            <Link href="/crop-recommendation" className="text-sm font-medium">
-              Crop Recommendation
-            </Link>
-            <Link href="/disease-detection" className="text-sm font-medium">
-              Disease Detection
-            </Link>
-            <Link href="/about">
-            About
-            </Link>
-            {/* <Link href="/weather" className="text-sm font-medium">
-              Weather
-            </Link> */}
-          </nav>
+          ))}
+        </nav>
 
-          <Button variant="outline" size="sm">
-            <LogoutLink>Log out</LogoutLink>
-          </Button>
-        </div>
-      </header>
-    </>
+        <Button variant="outline" size="sm">
+          <LogoutLink>Log out</LogoutLink>
+        </Button>
+      </div>
+    </header>
   );
 };
 

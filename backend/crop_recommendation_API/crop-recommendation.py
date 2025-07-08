@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier # type: ignore
 from sklearn.model_selection import train_test_split # type: ignore
 import joblib # type: ignore
 
-# Load dataset
+
 # df = pd.read_csv("crop_data.csv")  # <-- change to your actual filename
 df = pd.read_csv("crop_recommendation.xls")  # <-- change to your actual filename
 

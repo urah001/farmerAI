@@ -10,6 +10,7 @@ import {
 import { CropRecommendationForm } from "@/components/crop-recommendation-form";
 import { CropRecommendationResults } from "@/components/crop-recommendation-results";
 import NavText from "@/components/NavText";
+import Footer from "@/components/footer";
 
 export default function CropRecommendationPage() {
   const [result, setResult] = useState("");
@@ -91,6 +92,7 @@ export default function CropRecommendationPage() {
             </Card>
           </div>
         </div>
+        <Footer/>
       </div>
     </>
   );
