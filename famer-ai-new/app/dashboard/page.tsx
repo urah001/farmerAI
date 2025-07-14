@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import { CropRecommendationResults } from "@/components/crop-recommendation-results";
 import { WeatherDashboard } from "@/components/weather-dashboard";
 import NavText from "@/components/NavText";
+import Footer from "@/components/footer";
 
 export default function DashboardPage() {
   const [weather, setWeather] = useState<any>(null);
@@ -114,6 +115,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+    <Footer/>
     </div>
     </>
   );

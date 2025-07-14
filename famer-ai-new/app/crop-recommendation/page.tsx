@@ -35,7 +35,7 @@ export default function CropRecommendationPage() {
               </CardDescription>
             </CardHeader>
             <CardContent> 
-              <CropRecommendationForm onResult={setResult} /> FIXED HERE
+              <CropRecommendationForm onResult={setResult} /> 
             </CardContent>
           </Card>
 

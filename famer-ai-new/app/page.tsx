@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -55,11 +55,12 @@ export default function Home() {
                   </div>
                 </div>
                 <Image
-                  src="/Localfamer.jpg?height=550&width=800"
+                  src="/Localfamer.jpg"
                   alt="Smart farming with AI"
-                  width={800}
-                  height={550}
-                  className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
+                  width={900}
+                  height={50}
+                  className=" rounded-xl
+                 mx-auto aspect-video overflow-hidden  object-cover sm:w-full lg:order-last"
                 />
               </div>
             </div>
